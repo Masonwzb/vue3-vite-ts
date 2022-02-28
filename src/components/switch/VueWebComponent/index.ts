@@ -1,0 +1,1 @@
+import { defineCustomElement } from 'vue'

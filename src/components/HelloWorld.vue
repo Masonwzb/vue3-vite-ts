@@ -1,9 +1,12 @@
 <script setup lang="ts">
-  import { ref, onBeforeUpdate, onUpdated } from 'vue'
+  import { ref, onBeforeUpdate, onUpdated, computed } from 'vue'
 
   defineProps<{ msg: string }>()
 
-  const count = ref(0)
+  const count = ref(3)
+
+  const double = computed(() => count.value * 2);
+  console.log('double ? ', double);
 
   const list = ref([1, 2, 3])
 

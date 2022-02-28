@@ -16,3 +16,4 @@ for (let s of strings) {
         console.log(`"${ s }" - ${ validators[name].isAcceptable(s) ? "matches" : "does not match" } ${ name }`);
     }
 }
+
