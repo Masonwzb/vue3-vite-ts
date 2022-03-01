@@ -4,16 +4,17 @@
 import HelloWorld from './components/HelloWorld.vue'
 import FreeDragColumn from './components/freeDragColumn/index.vue';
 import './components/switch/vueWebComponent/index.ts'
+// import './components/switch/webComponent/index.ts'
 
-function personaChanged(e: Event) {
-  const [isChecked, theOther] = (e as CustomEvent).detail;
-  console.log('is get ??? Event the bind for vue define', isChecked, theOther);
+function personaChanged(isChecked: boolean) {
+  // const [isChecked] = (e as CustomEvent).detail;
+  console.log('is get ??? Event the bind for web define', isChecked);
 }
 </script>
 
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <persona-switch @update="personaChanged"></persona-switch>
+  <persona-switch @update="personaChanged" customprop="vueAttribute"></persona-switch>
 <!--  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />-->
 <!--  <FreeDragColumn></FreeDragColumn>-->
 </template>

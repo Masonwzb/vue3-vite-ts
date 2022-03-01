@@ -72,9 +72,12 @@ class PersonaSwitch extends HTMLElement {
         const theTarget = e.target as HTMLInputElement
         console.log('the input checked ? ~', theTarget.checked)
 
-        const getEvent = new Event('get', {
+        const getEvent = new CustomEvent('get', {
             bubbles: true,
             composed: true,
+            detail: {
+                isChecked: true
+            }
         })
 
         this.shadowRoot?.firstElementChild?.dispatchEvent(getEvent)
@@ -85,6 +88,9 @@ class PersonaSwitch extends HTMLElement {
         const myInput =  this.shadowRoot?.getElementById('toggle')
 
         console.log('my Input ? ', myInput)
+
+        // get custom attribute
+        console.log('get custom attribute', this.getAttribute('customProp'))
 
         myInput?.addEventListener('change', this.inputChange.bind(this))
     }

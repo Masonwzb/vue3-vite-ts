@@ -4,14 +4,20 @@
 </template>
 
 <script setup lang="ts">
+import { defineEmits, defineProps } from "vue";
+
+const props = defineProps<{
+  customprop: string
+}>()
 
 const emit = defineEmits<{
-  (e: 'update', isChecked: boolean, theOther: string): void
+  (e: 'update', isChecked: boolean): void
 }>()
 
 function inputChanged(e: Event) {
   const isChecked = (e.target as HTMLInputElement).checked;
-  emit('update', isChecked, 'theOtherParam')
+  emit('update', isChecked)
+  console.log('my props ? ', props)
 }
 
 </script>
