@@ -3,16 +3,17 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import HelloWorld from './components/HelloWorld.vue'
 import FreeDragColumn from './components/freeDragColumn/index.vue';
-import './components/switch/webComponent/index.ts'
+import './components/switch/vueWebComponent/index.ts'
 
-function personaChanged() {
-  console.log('is get ??? Event the bind');
+function personaChanged(e: Event) {
+  const [isChecked, theOther] = (e as CustomEvent).detail;
+  console.log('is get ??? Event the bind for vue define', isChecked, theOther);
 }
 </script>
 
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <persona-switch @get="personaChanged"></persona-switch>
+  <persona-switch @update="personaChanged"></persona-switch>
 <!--  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />-->
 <!--  <FreeDragColumn></FreeDragColumn>-->
 </template>

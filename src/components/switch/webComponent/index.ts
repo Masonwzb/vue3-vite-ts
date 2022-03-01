@@ -76,12 +76,13 @@ class PersonaSwitch extends HTMLElement {
             bubbles: true,
             composed: true,
         })
-        this.shadowRoot.firstElementChild.dispatchEvent(getEvent)
+
+        this.shadowRoot?.firstElementChild?.dispatchEvent(getEvent)
     }
 
     connectedCallback() {
         console.log('Custom element added to page.')
-        const myInput =  this.shadowRoot.getElementById('toggle')
+        const myInput =  this.shadowRoot?.getElementById('toggle')
 
         console.log('my Input ? ', myInput)
 
@@ -91,7 +92,7 @@ class PersonaSwitch extends HTMLElement {
     disconnectedCallback() {
         console.log('Custom element removed from page.')
 
-        const myInput =  this.shadowRoot.getElementById('toggle')
+        const myInput =  this.shadowRoot?.getElementById('toggle')
 
         console.log('my Input ? ', myInput)
 
