@@ -94,6 +94,7 @@ export default defineComponent( {
     })
 
     const handleChange = (): void => {
+      console.log('is Click ? ', checked.value, props)
       const val = checked.value ? props.inactiveValue : props.activeValue
       emit(UPDATE_MODEL_EVENT, val)
       emit(CHANGE_EVENT, val)
@@ -127,5 +128,6 @@ export default defineComponent( {
 </script>
 
 <style>
+@import "./style/base.css";
 @import "./style/el-switch.css";
 </style>
