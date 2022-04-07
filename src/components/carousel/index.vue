@@ -112,7 +112,7 @@ const nextClick = () => {
      */
     realX = backRemainNumber >= showNumber
         ? translate3dX.value - displayAreaWidth
-        : firstSlideShowPosition + (-slideWidth * (showNumber - backRemainNumber))
+        : lastSlideShowPosition
     fakeX = realX
   }
   console.log('next - fake - real ? ', fakeX, realX)
