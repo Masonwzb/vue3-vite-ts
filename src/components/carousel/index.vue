@@ -47,7 +47,7 @@ const slideWidth = 140
 // 展示区域第一个滑块的位置
 const firstSlideShowPosition = -(showNumber * slideWidth)
 // 展示区域最后一个滑块的位置
-const lastSlideShowPosition = - (sliderLength * slideWidth)
+const lastSlideShowPosition = -(sliderLength * slideWidth)
 // 展示区域宽度
 const displayAreaWidth = showNumber * slideWidth
 
