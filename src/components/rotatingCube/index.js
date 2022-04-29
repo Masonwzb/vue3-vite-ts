@@ -47,26 +47,26 @@ window.addEventListener('load', () => {
 
     const faceLeft = document.querySelector('.face.left')
     faceLeft?.addEventListener('click', () => {
-        lastXDeg = -90;
-        lastYDeg = 0;
-        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(${lastXDeg}deg) rotateX(${lastYDeg}deg`;
-    })
-    faceLeft?.addEventListener('dblclick', () => {
         lastXDeg = 90;
         lastYDeg = 0;
-        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(${lastXDeg}deg) rotateX(${lastYDeg}deg)`;
+        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(-90deg) rotateX(0deg)`;
+    })
+    faceLeft?.addEventListener('dblclick', () => {
+        lastXDeg = -90;
+        lastYDeg = 0;
+        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(90deg) rotateX(0deg)`;
     })
 
     const faceRight = document.querySelector('.face.right')
     faceRight?.addEventListener('click', () => {
-        lastXDeg = 90;
-        lastYDeg = 0;
-        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(${lastXDeg}deg) rotateX(${lastYDeg}deg)`;
-    })
-    faceRight?.addEventListener('dblclick', () => {
         lastXDeg = -90;
         lastYDeg = 0;
-        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(${lastXDeg}deg) rotateX(${lastYDeg}deg)`;
+        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(90deg) rotateX(0deg)`;
+    })
+    faceRight?.addEventListener('dblclick', () => {
+        lastXDeg = 90;
+        lastYDeg = 0;
+        cube.style.transform = `translateZ(${defaultPerspective}) rotateY(-90deg) rotateX(0deg)`;
     })
 
     const faceTop = document.querySelector('.face.top')
@@ -142,6 +142,12 @@ function rotateCube() {
     // lastYDeg = lastYDeg + (getAngle(mouseY) - lastYDeg) * speed;
     lastXDeg = initX +  getAngle(mouseX) - originX
     lastYDeg = initY +  getAngle(mouseY) - originY
+
+    if (lastXDeg > 360) lastXDeg = lastXDeg - 360
+    if (lastXDeg < -360) lastXDeg = lastXDeg + 360
+    if (lastYDeg > 360) lastYDeg = lastYDeg - 360
+    if (lastYDeg < -360) lastYDeg = lastYDeg + 360
+
     let newStyle = `translateZ(${defaultPerspective}) rotateY(${-lastXDeg}deg) rotateX(${lastYDeg}deg)`;
     const cube = document.querySelector('.cube');
     cube.style.transform = newStyle
