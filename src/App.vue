@@ -31,6 +31,8 @@ const value1 = ref(true)
 <!--  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />-->
 <!--  <FreeDragColumn></FreeDragColumn>-->
   <div class="container">
+    <button type="button" class="cube-button">Random</button>
+    <div class="ball"></div>
     <div class="cube-container">
       <div class="cube">
         <div class="face front"></div>

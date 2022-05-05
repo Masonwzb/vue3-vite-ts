@@ -92,6 +92,20 @@ window.addEventListener('load', () => {
         lastYDeg = -90;
         cube.style.transform = `translateZ(${defaultPerspective}) rotateY(${lastXDeg}deg) rotateX(${lastYDeg}deg)`;
     })
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const btn = document.querySelector('.cube-button')
+    btn.addEventListener('click', () => {
+        const x = getRandomInt(-360, 360)
+        const y = getRandomInt(-360, 360)
+        const z = getRandomInt(-360, 360)
+        cube.style.transform = `translateZ(${defaultPerspective}) rotateX(${x}deg) rotateY(${y}deg)  rotateZ(${z}deg)`;
+    })
 });
 window.addEventListener('mousedown', (e) => {
     e.stopPropagation()
@@ -122,10 +136,9 @@ function drawContent() {
     const faces = Array.from(document.querySelectorAll('.face'));
     for (const face of faces) {
         face.innerHTML = `
-        <div class='outer-layer'></div>
-        <div class='cover cicle'></div>
         <div class='inner cicle'>
-        <i class="fas fa-heart">${face.classList[1]}</i>
+            <i class="fas fa-heart">${face.classList[1]}</i>
+        </div>
         `
     }
 }
