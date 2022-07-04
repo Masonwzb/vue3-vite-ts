@@ -10,8 +10,11 @@ import { ref } from 'vue'
 // import './components/switch/element/components/index.ts'
 // import carouselDemo from './components/carousel/index.vue'
 // import CarouselDemo from "./components/carousel/index.vue";
-
 import "./components/rotatingCube/index.js"
+// import './practice/fileParse/gltf.ts'
+import './practice/comlink/index.ts'
+
+// import EventTest from './components/eventListener/index.vue'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail
@@ -30,6 +33,7 @@ const value1 = ref(true)
 <!--  <persona-switch @update="personaChanged" customprop="vueAttribute"></persona-switch>-->
 <!--  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />-->
 <!--  <FreeDragColumn></FreeDragColumn>-->
+
   <div class="container">
     <button type="button" class="cube-button">Random</button>
     <div class="ball"></div>
@@ -44,6 +48,9 @@ const value1 = ref(true)
       </div>
     </div>
   </div>
+
+<!--  <EventTest />-->
+
 </template>
 
 <style>

@@ -136,7 +136,7 @@ function drawContent() {
     const faces = Array.from(document.querySelectorAll('.face'));
     for (const face of faces) {
         face.innerHTML = `
-        <div class='inner cicle'>
+        <div class='inner circle'>
             <i class="fas fa-heart">${face.classList[1]}</i>
         </div>
         `

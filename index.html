@@ -9,5 +9,20 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <p class="main">main body</p>
+    <iframe src="iframe.html" width="500px" height="500px"></iframe>
   </body>
+  <script>
+      // message port
+      const channel = new MessageChannel()
+
+      const iframeNode = document.querySelector('iframe')
+      const main = document.querySelector('.main');
+      iframeNode.addEventListener('load', () => {
+          channel.port1.onmessage = (event) => {
+              main.innerHTML = event.data
+          }
+          iframeNode.contentWindow.postMessage('from the windows', '*', [channel.port2])
+      })
+  </script>
 </html>

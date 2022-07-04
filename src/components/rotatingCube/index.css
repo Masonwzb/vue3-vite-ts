@@ -6,7 +6,7 @@
     min-height: 100vh;
     background-color: #353a47;
     position: relative;
-    cursor: move;
+    cursor: pointer;
 }
 .ball {
     display: block;
@@ -37,7 +37,7 @@
     justify-content: center;
     align-items: center;
     transform-style: preserve-3d;
-    transform: translateZ(-150px) rotateX(0deg) rotateY(0deg);
+    transform: translateZ(-150px) rotateX(-45deg) rotateY(45deg)  rotateZ(25deg);
 }
 @keyframes rotateCube {
     0% {
@@ -79,13 +79,13 @@
     background: #5686CD;
     transform: rotateY(-90deg) translateZ(150px);
 }
-.container .cube-container .cube .face .cicle {
+.container .cube-container .cube .face .circle {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
 }
-.container .cube-container .cube .face .cicle.inner {
+.container .cube-container .cube .face .circle.inner {
     width: 100%;
     height: 100%;
     font-size: 5em;

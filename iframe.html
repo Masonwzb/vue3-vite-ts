@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iframe page</title>
+</head>
+<body>
+    <div class="output">Iframe body</div>
+</body>
+<script>
+    window.addEventListener('message', (event) => {
+        const div = document.querySelector('.output')
+        div.innerHTML = event.data
+        event.ports[0].postMessage('啦啦啦， I from port2')
+    })
+</script>
+</html>
