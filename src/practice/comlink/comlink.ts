@@ -283,7 +283,7 @@ export const transferHandlers = new Map<
 
 export function expose(obj: any, ep: Endpoint = self as any) {
   ep.addEventListener("message", function callback(ev: MessageEvent) {
-    console.log('获取到消息 -expose- ', ev, ep)
+    console.log('获取到消息 -expose- ', ev, ep, obj)
     if (!ev || !ev.data) {
       return;
     }
@@ -296,6 +296,7 @@ export function expose(obj: any, ep: Endpoint = self as any) {
     try {
       const parent = path.slice(0, -1).reduce((obj, prop) => obj[prop], obj);
       const rawValue = path.reduce((obj, prop) => obj[prop], obj);
+      console.log('rawValue - ', rawValue, obj)
       switch (type) {
         case MessageType.GET:
           {
@@ -397,7 +398,6 @@ function createProxy<T>(
         };
       }
       if (prop === "then") {
-        console.log('createProxy get- ', _target, prop)
         if (path.length === 0) {
           return { then: () => proxy };
         }

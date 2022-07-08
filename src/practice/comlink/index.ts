@@ -1,22 +1,22 @@
 import * as Comlink from './comlink'
 import MyWorker from './worker?worker&inline'
+import './messageChannel'
 
-interface Obj {
-    counter: number
-    inc: () => void
-}
+// interface Obj {
+//     counter: number
+//     inc: () => void
+// }
 
 const worker = new MyWorker()
 
-const obj: Obj = Comlink.wrap(worker)
+const myClass = Comlink.wrap(worker)
 
 function callback(value) {
     alert(`Result?: ${value}`);
 }
 
 async function start() {
-    const res = await obj.inc()
-    console.log('counter - ', res)
+    const theClass = await new myClass()
+    const counter = await theClass.obj.counter
+    console.log('counter - ', counter)
 }
-
-start()

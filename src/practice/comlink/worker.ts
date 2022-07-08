@@ -4,7 +4,7 @@ const myValue = 67
 
 class MyClass {
     obj = {
-        counter: 0,
+        counter: 7,
         inc() {
             this.counter++
         }
@@ -26,4 +26,4 @@ const obj = {
     }
 }
 
-Comlink.expose(obj)
+Comlink.expose(MyClass)
