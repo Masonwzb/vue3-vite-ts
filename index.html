@@ -10,19 +10,19 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <p class="main">main body</p>
+    <button id="startButton">start</button>
+    <button id="callButton">call</button>
+    <button id="hangupButton">hangup</button>
+    <video id="localVideo" playsinline autoplay muted></video>
     <iframe src="iframe.html" width="500px" height="500px"></iframe>
-  </body>
-  <script>
-      // message port
-      const channel = new MessageChannel()
 
-      const iframeNode = document.querySelector('iframe')
-      const main = document.querySelector('.main');
-      iframeNode.addEventListener('load', () => {
-          channel.port1.onmessage = (event) => {
-              main.innerHTML = event.data
-          }
-          iframeNode.contentWindow.postMessage('from the windows', '*', [channel.port2])
-      })
-  </script>
+    <hr/>
+
+    <button id="takePhotoBtn" class="button is-text">
+        Take Photo
+    </button>
+
+    <canvas id="canvas" hidden></canvas>
+    <img id="photo" alt="The screen capture will appear in this box.">
+  </body>
 </html>

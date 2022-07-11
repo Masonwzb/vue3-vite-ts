@@ -10,11 +10,11 @@ import { ref } from 'vue'
 // import './components/switch/element/components/index.ts'
 // import carouselDemo from './components/carousel/index.vue'
 // import CarouselDemo from "./components/carousel/index.vue";
-import "./components/rotatingCube/index.js"
+import "./components/rotatingCube"
 // import './practice/fileParse/gltf.ts'
-import './practice/comlink/index.ts'
-
+// import './practice/comlink/index.ts'
 // import EventTest from './components/eventListener/index.vue'
+import './practice/webRTC/twoTabPeerconnection.js'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail

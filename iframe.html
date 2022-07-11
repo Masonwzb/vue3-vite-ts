@@ -6,12 +6,114 @@
 </head>
 <body>
     <div class="output">Iframe body</div>
+    <video id="remoteVideo" playsinline autoplay muted></video>
 </body>
 <script>
+    const remoteVideo = document.getElementById('remoteVideo')
+
+    let port = null
+
     window.addEventListener('message', (event) => {
+        if (!port) {
+            port = event.ports[0]
+        }
+
         const div = document.querySelector('.output')
-        div.innerHTML = event.data
-        event.ports[0].postMessage('啦啦啦， I from port2')
+        div.innerHTML = 'get data'
+
+        switch (event.data.type) {
+            case 'offer':
+                handleOffer(event)
+                break
+            case 'candidate':
+                handleCandidate(event)
+                break
+            default:
+                break
+        }
     })
+
+    let pc2
+
+    async function handleOffer(e) {
+        const offer = e.data
+
+        pc2 = new RTCPeerConnection();
+        console.log('Created remote peer connection object pc2', e);
+
+        await pc2.setRemoteDescription(offer);
+        onSetRemoteSuccess(pc2)
+        const answer = await pc2.createAnswer();
+        await pc2.setLocalDescription(answer)
+        onSetLocalSuccess(pc2)
+        port.postMessage({type: 'answer', sdp: answer.sdp});
+
+        pc2.addEventListener('icecandidate', e => onIceCandidate(pc2, e));
+        pc2.addEventListener('iceconnectionstatechange', e => onIceStateChange(pc2, e));
+        pc2.addEventListener('track', gotRemoteStream)
+    }
+
+    function gotRemoteStream(e) {
+        console.log('the fuck  track ? ', e)
+        if (remoteVideo.srcObject !== e.streams[0]) {
+            remoteVideo.srcObject = e.streams[0];
+            console.log('pc2 received remote stream');
+        }
+    }
+
+    async function onIceCandidate(pc, e) {
+        const message = {
+            type: 'candidate',
+            candidate: null
+        }
+        if (e.candidate) {
+            message.candidate = e.candidate.candidate;
+            message.sdpMid = e.candidate.sdpMid;
+            message.sdpMLineIndex = e.candidate.sdpMLineIndex;
+            console.log(`pc2 ICE candidate:\n${e.candidate ? e.candidate.candidate : '(null)'}`);
+        }
+        port.postMessage(message)
+    }
+
+    function onAddIceCandidateSuccess() {
+        console.log('p2 addIceCandidate success');
+    }
+
+    function onAddIceCandidateError(pc, error) {
+        console.log(`p2 failed to add ICE Candidate: ${error.toString()}`);
+    }
+
+    function onIceStateChange(pc, event) {
+        if (pc) {
+            console.log(`pc2 ICE state: ${pc.iceConnectionState}`);
+            console.log('pc2 ICE state change event: ', event);
+        }
+        if (pc.iceConnectionState === 'connected') {
+            console.log('get remote stream - ', pc2.getRemoteStreams())
+            remoteVideo.srcObject = pc2.getRemoteStreams()[0]
+        }
+    }
+
+    function onSetLocalSuccess() {
+        console.log('p2 setLocalDescription complete');
+    }
+
+    function onSetRemoteSuccess() {
+        console.log('p2 setRemoteDescription complete');
+    }
+
+    async function handleCandidate(event) {
+        console.log('the pc2 handleCandidate -  ', event)
+        try {
+            if (!event.data.candidate) {
+                await pc2.addIceCandidate(null);
+            } else {
+                await pc2.addIceCandidate(event.data);
+            }
+            onAddIceCandidateSuccess();
+        } catch (e) {
+            onAddIceCandidateError(e);
+        }
+    }
 </script>
 </html>
