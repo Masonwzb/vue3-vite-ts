@@ -5,8 +5,8 @@
     <title>iframe page</title>
 </head>
 <body>
-    <div class="output">Iframe body</div>
-    <video id="remoteVideo" playsinline autoplay muted></video>
+<div class="output">Iframe body</div>
+<video id="remoteVideo" playsinline autoplay muted></video>
 </body>
 <script>
     const remoteVideo = document.getElementById('remoteVideo')
@@ -89,8 +89,10 @@
             console.log('pc2 ICE state change event: ', event);
         }
         if (pc.iceConnectionState === 'connected') {
-            console.log('get remote stream - ', pc2.getRemoteStreams())
-            remoteVideo.srcObject = pc2.getRemoteStreams()[0]
+            console.log('get remote getReceivers - ', pc2.getReceivers())
+            const customStream = new MediaStream()
+            pc2.getReceivers().forEach(receiver => customStream.addTrack(receiver.track))
+            remoteVideo.srcObject = customStream
         }
     }
 

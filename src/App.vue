@@ -15,6 +15,7 @@ import "./components/rotatingCube"
 // import './practice/comlink/index.ts'
 // import EventTest from './components/eventListener/index.vue'
 import './practice/webRTC/twoTabPeerconnection.js'
+// import './practice/inversify'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail
