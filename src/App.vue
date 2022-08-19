@@ -14,13 +14,13 @@ import "./components/rotatingCube"
 // import './practice/fileParse/gltf.ts'
 // import './practice/comlink/index.ts'
 // import EventTest from './components/eventListener/index.vue'
-import './practice/webRTC/twoTabPeerconnection.js'
+// import './practice/webRTC/twoTabPeerconnection.js'
 // import './practice/inversify'
+import './practice/designPatterns/factory/eg1.ts'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail
   value1.value = isChecked
-  console.log('is get ??? Event the bind for element', isChecked)
 }
 
 const value1 = ref(true)
