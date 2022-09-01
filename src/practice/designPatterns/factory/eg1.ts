@@ -21,7 +21,7 @@ class WindowsDialog extends Dialog {
   }
 }
 
-class WebDialog  extends Dialog {
+class WebDialog extends Dialog {
   createButton(): Button {
     return new HTMLButton()
   }
@@ -37,7 +37,7 @@ class WindowsButton implements Button {
   }
 }
 
-class HTMLButton  implements Button {
+class HTMLButton implements Button {
   render() {
     console.log('HTMLButton render')
   }
@@ -48,7 +48,7 @@ class HTMLButton  implements Button {
 }
 
 export class Application {
-  private dialog: Dialog
+  private dialog: Dialog | undefined
 
   // 程序根据当前配置或环境设定选择创建者的类型。
   initialize(type: string) {
@@ -62,13 +62,12 @@ export class Application {
   }
 
   render() {
-    this.dialog.render()
+    this.dialog?.render()
   }
 }
 
-(function() {
+;(function () {
   const app = new Application()
   app.initialize('Windows')
   app.render()
 })()
-

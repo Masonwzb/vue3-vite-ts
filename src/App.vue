@@ -16,8 +16,8 @@ import { ref } from 'vue'
 // import EventTest from './components/eventListener/index.vue'
 // import './practice/webRTC/twoTabPeerconnection.js'
 // import './practice/inversify'
-// import './practice/designPatterns/factory/eg1.ts'
-import TimeLineSlider from './components/slider'
+import './practice/designPatterns/prototype/eg1.ts'
+// import TimeLineSlider from './components/slider'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail
@@ -55,7 +55,7 @@ const value2 = ref(3)
 
 <!--  <EventTest />-->
 
-  <TimeLineSlider />
+<!--  <TimeLineSlider />-->
 
 </template>
 

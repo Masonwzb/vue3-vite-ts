@@ -59,7 +59,7 @@ class WinCheckbox implements Checkbox {
   }
 }
 
-class MacCheckbox  implements Checkbox {
+class MacCheckbox implements Checkbox {
   paint() {
     console.log('MacCheckbox   paint')
   }
@@ -67,7 +67,7 @@ class MacCheckbox  implements Checkbox {
 
 class Application {
   private factory: GUIFactory
-  private button: Button
+  private button: Button | undefined
 
   constructor(factory: GUIFactory) {
     this.factory = factory
@@ -78,12 +78,12 @@ class Application {
   }
 
   public paint() {
-    this.button.paint()
+    this.button?.paint()
   }
 }
 
 export class ApplicationConfigurator {
-  private factory: GUIFactory
+  private factory: GUIFactory | undefined
 
   // 程序根据当前配置或环境设定选择创建者的类型。
   initialize(type: string) {
@@ -101,9 +101,7 @@ export class ApplicationConfigurator {
   }
 }
 
-(function() {
+;(function () {
   const app = new ApplicationConfigurator()
   app.initialize('Windows')
 })()
-
-
