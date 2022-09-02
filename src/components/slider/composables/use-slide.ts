@@ -10,9 +10,9 @@ export const useSlide = (
 ) => {
   const slider = shallowRef<HTMLElement>()
 
-  const firstButton = ref()
+  const firstButton = ref<HTMLElement | null>(null)
 
-  const secondButton = ref()
+  const secondButton = ref<HTMLElement | null>(null)
 
   const buttonRefs: any = {
     firstButton,

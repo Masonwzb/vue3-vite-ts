@@ -1,9 +1,10 @@
 import { defineComponent, computed, provide, reactive, toRefs } from 'vue'
 import { sliderContextKey } from './utils/provideKey'
 import { useLifecycle, useSlide, useWatch } from './composables'
-import type { SliderInitData } from './slider'
 import { definePropType } from './utils'
 import { Arrayable } from './types'
+import SliderButton from './button'
+import type { SliderInitData } from './slider'
 
 const TimeLineSlider = defineComponent({
   name: 'TimeLineSlider',
@@ -91,9 +92,32 @@ const TimeLineSlider = defineComponent({
       onSliderClick
     })
 
+    const makeTheCut = () => {
+      return props.range ? (
+        <SliderButton
+          ref={secondButton}
+          modelValue={secondValue.value}
+          onUpdate:modelValue={setSecondValue}
+        />
+      ) : null
+    }
+
     return () => (
-      <div>
-        <span>123</span>
+      <div ref={sliderWrapper} class="avatar-slider">
+        <div
+          ref={slider}
+          class={['avatar-slider__runway', { 'is-disabled': sliderDisabled.value }]}
+          style={runwayStyle.value}
+          onMousedown={onSliderDown}
+        >
+          <div class="avatar-slider__bar" style={barStyle.value} />
+          <SliderButton
+            ref={firstButton}
+            modelValue={firstValue.value}
+            onUpdate:modelValue={setFirstValue}
+          />
+          {makeTheCut()}
+        </div>
       </div>
     )
   }
