@@ -1,7 +1,6 @@
 import { warn } from 'vue'
 import { fromPairs } from 'lodash-es'
-import { isObject } from './types'
-import { hasOwn } from './objects'
+import { hasOwn, isObject } from '@vue/shared'
 import type { PropType } from 'vue'
 import type {
   EpProp,
@@ -112,3 +111,6 @@ export const buildProps = <
   fromPairs(
     Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)])
   ) as any
+
+export { isArray, isFunction, isObject, isString, isDate, isPromise, isSymbol } from '@vue/shared'
+export { isBoolean, isNumber } from '@vueuse/core'

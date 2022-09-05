@@ -44,6 +44,24 @@
     position: absolute
   }
 
+  &__cut--one {
+    height: 6px;
+    background-color: #FF7672;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    position: absolute;
+    top: -6px;
+  }
+
+  &__cut--two {
+    height: 6px;
+    background-color: #FF7672;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    position: absolute;
+    top: 6px;
+  }
+
   &__button-wrapper {
     height: 36px;
     width: 36px;
@@ -72,27 +90,44 @@
     }
   }
 
-  &__button {
+  &__button--pointer {
+    position: relative;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 2px;
+    height: 28px;
     vertical-align: middle;
-    border: solid 2px #409eff;
     background-color: #ffffff;
-    border-radius: 50%;
     box-sizing: border-box;
     transition: 0.2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 
-    &.hover, &:hover {
-      transform: scale(1.2);
+    &::before {
+      content: '';
+      position: absolute;
+      top: -9px;
+      left: -4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ffffff;
     }
 
     &.dragging {
-      transform: scale(1.2);
+      cursor: grabbing;
+    }
+  }
+
+  &__button--cut {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    vertical-align: middle;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: 0.2s;
+    user-select: none;
+
+    &.dragging {
       cursor: grabbing;
     }
   }

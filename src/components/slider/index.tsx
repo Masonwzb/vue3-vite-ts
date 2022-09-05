@@ -37,6 +37,7 @@ const TimeLineSlider = defineComponent({
     const initData = reactive<SliderInitData>({
       firstValue: 0,
       secondValue: 0,
+      thirdValue: 50,
       oldValue: 0,
       dragging: false,
       sliderSize: 1
@@ -49,15 +50,14 @@ const TimeLineSlider = defineComponent({
       sliderDisabled,
       minValue,
       maxValue,
-      runwayStyle,
       barStyle,
       resetSize,
       emitChange,
-      onSliderWrapperPrevent,
       onSliderClick,
       onSliderDown,
       setFirstValue,
-      setSecondValue
+      setSecondValue,
+      setThirdValue
     } = useSlide(props, initData, emit)
 
     useWatch(props, initData, minValue, maxValue, emit)
@@ -72,7 +72,7 @@ const TimeLineSlider = defineComponent({
 
     const { sliderWrapper } = useLifecycle(props, initData, resetSize)
 
-    const { firstValue, secondValue, sliderSize } = toRefs(initData)
+    const { firstValue, secondValue, thirdValue, sliderSize } = toRefs(initData)
 
     const updateDragging = (val: boolean) => {
       initData.dragging = val
@@ -92,13 +92,25 @@ const TimeLineSlider = defineComponent({
       onSliderClick
     })
 
+    const getButtonClass = () => {
+      return props.range ? 'avatar-slider__button--cut' : 'avatar-slider__button--pointer'
+    }
+
     const makeTheCut = () => {
       return props.range ? (
-        <SliderButton
-          ref={secondButton}
-          modelValue={secondValue.value}
-          onUpdate:modelValue={setSecondValue}
-        />
+        <>
+          <SliderButton
+            ref={secondButton}
+            buttonClass="avatar-slider__button--cut"
+            modelValue={secondValue.value}
+            onUpdate:modelValue={setSecondValue}
+          />
+          <SliderButton
+            buttonClass="avatar-slider__button--pointer"
+            modelValue={thirdValue.value}
+            onUpdate:modelValue={setThirdValue}
+          />
+        </>
       ) : null
     }
 
@@ -107,12 +119,14 @@ const TimeLineSlider = defineComponent({
         <div
           ref={slider}
           class={['avatar-slider__runway', { 'is-disabled': sliderDisabled.value }]}
-          style={runwayStyle.value}
           onMousedown={onSliderDown}
         >
           <div class="avatar-slider__bar" style={barStyle.value} />
+          <div v-show={props.range} class="avatar-slider__cut--one" style={barStyle.value} />
+          <div v-show={props.range} class="avatar-slider__cut--two" style={barStyle.value} />
           <SliderButton
             ref={firstButton}
+            buttonClass={getButtonClass()}
             modelValue={firstValue.value}
             onUpdate:modelValue={setFirstValue}
           />

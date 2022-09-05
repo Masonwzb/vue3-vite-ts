@@ -1,5 +1,5 @@
 import { watch } from 'vue'
-import { debugWarn, throwError } from '../utils/error'
+import { throwError } from '../utils/error'
 import type { ComputedRef, SetupContext } from 'vue'
 import type { Arrayable } from '../types'
 import type { SliderEmits, SliderInitData, SliderProps } from '../slider'
@@ -97,6 +97,39 @@ export const useWatch = (
     () => [props.min, props.max],
     () => {
       setValues()
+    }
+  )
+
+  const resetThirdValue = () => {
+    const min = Math.min(initData.firstValue, initData.secondValue)
+    const max = Math.max(initData.firstValue, initData.secondValue)
+    if (initData.thirdValue < min) {
+      initData.thirdValue = min
+    }
+
+    if (initData.thirdValue > max) {
+      initData.thirdValue = max
+    }
+  }
+
+  watch(
+    () => initData.firstValue,
+    () => {
+      resetThirdValue()
+    }
+  )
+
+  watch(
+    () => initData.secondValue,
+    () => {
+      resetThirdValue()
+    }
+  )
+
+  watch(
+    () => initData.thirdValue,
+    () => {
+      resetThirdValue()
     }
   )
 }

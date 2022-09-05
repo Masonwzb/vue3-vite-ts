@@ -9,6 +9,10 @@ const SliderButton = defineComponent({
     modelValue: {
       type: Number,
       default: 0
+    },
+    buttonClass: {
+      type: String,
+      default: 'avatar-slider__button--pointer'
     }
   },
   setup(props, { emit, expose }) {
@@ -59,7 +63,7 @@ const SliderButton = defineComponent({
         onBlur={handleMouseLeave}
         onKeydown={onKeyDown}
       >
-        <div class="avatar-slider__button" />
+        <div class={props.buttonClass} />
       </div>
     )
   }

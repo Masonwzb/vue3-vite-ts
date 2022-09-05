@@ -2,6 +2,7 @@ import { computed, nextTick, ref, shallowRef } from 'vue'
 import type { CSSProperties, Ref, SetupContext } from 'vue'
 import type { Arrayable } from '../types'
 import type { SliderEmits, SliderInitData, SliderProps } from '../slider'
+import type { ButtonRefs, SliderButtonInstance } from '../button/button'
 
 export const useSlide = (
   props: SliderProps,
@@ -10,11 +11,11 @@ export const useSlide = (
 ) => {
   const slider = shallowRef<HTMLElement>()
 
-  const firstButton = ref<HTMLElement | null>(null)
+  const firstButton = ref<SliderButtonInstance>()
 
-  const secondButton = ref<HTMLElement | null>(null)
+  const secondButton = ref<SliderButtonInstance>()
 
-  const buttonRefs: any = {
+  const buttonRefs: ButtonRefs = {
     firstButton,
     secondButton
   }
@@ -41,10 +42,6 @@ export const useSlide = (
     return props.range ? `${(100 * (minValue.value - props.min)) / (props.max - props.min)}%` : '0%'
   })
 
-  const runwayStyle = computed<CSSProperties>(() => {
-    return {}
-  })
-
   const barStyle = computed<CSSProperties>(() => {
     return {
       width: barSize.value,
@@ -58,7 +55,7 @@ export const useSlide = (
     }
   }
 
-  const getButtonRefByPercent = (percent: number): Ref<any> => {
+  const getButtonRefByPercent = (percent: number): Ref<SliderButtonInstance | undefined> => {
     const targetValue = props.min + (percent * (props.max - props.min)) / 100
     if (!props.range) {
       return firstButton
@@ -72,8 +69,9 @@ export const useSlide = (
     return buttonRefs[buttonRefName]
   }
 
-  const setPosition = (percent: number): Ref<any> => {
+  const setPosition = (percent: number): Ref<SliderButtonInstance | undefined> => {
     const buttonRef = getButtonRefByPercent(percent)
+    // @ts-ignore
     buttonRef.value!.setPosition(percent)
     return buttonRef
   }
@@ -89,6 +87,10 @@ export const useSlide = (
     if (props.range) {
       _emit([minValue.value, maxValue.value])
     }
+  }
+
+  const setThirdValue = (thirdValue: number) => {
+    initData.thirdValue = thirdValue
   }
 
   const _emit = (val: Arrayable<number>) => {
@@ -112,6 +114,7 @@ export const useSlide = (
   }
 
   const onSliderWrapperPrevent = (event: TouchEvent) => {
+    // @ts-ignore
     if (buttonRefs['firstButton'].value?.dragging || buttonRefs['secondButton'].value?.dragging) {
       event.preventDefault()
     }
@@ -139,7 +142,6 @@ export const useSlide = (
     sliderDisabled,
     minValue,
     maxValue,
-    runwayStyle,
     barStyle,
     resetSize,
     setPosition,
@@ -148,6 +150,7 @@ export const useSlide = (
     onSliderClick,
     onSliderDown,
     setFirstValue,
-    setSecondValue
+    setSecondValue,
+    setThirdValue
   }
 }

@@ -1,11 +1,12 @@
 import { buildProps, definePropType } from './utils'
-import { isArray, isNumber } from './utils/types'
+import { isArray, isNumber } from './utils'
 import type { Arrayable } from './types'
 import type { ExtractPropTypes } from 'vue'
 
 export interface SliderInitData {
   firstValue: number
   secondValue: number
+  thirdValue: number
   oldValue?: Arrayable<number>
   dragging: boolean
   sliderSize: number

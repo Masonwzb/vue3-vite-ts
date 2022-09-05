@@ -55,9 +55,9 @@ const value2 = ref([30, 60])
 
 <!--  <EventTest />-->
 
-  <div style="width: 100%;display: flex;justify-content: center;align-items: center">
+  <div style="width: 100%;height: 100px;display: flex;justify-content: center;align-items: center;background: #2F354C;">
     <div style="width: 700px">
-      <TimeLineSlider range v-model='value2' />
+      <TimeLineSlider :range='true' v-model='value2' />
     </div>
   </div>
 

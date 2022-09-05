@@ -1,9 +1,7 @@
 import { computed, inject, nextTick, ref, watch } from 'vue'
-import { debounce } from 'lodash-es'
 import { EVENT_CODE } from '../contants'
 import { sliderContextKey } from '../utils/provideKey'
-import type { CSSProperties, ComputedRef, Ref, SetupContext } from 'vue'
-import type { SliderProps } from '../slider'
+import type { CSSProperties, ComputedRef, SetupContext } from 'vue'
 import type { SliderButtonEmits, SliderButtonInitData, SliderButtonProps } from '../button/button'
 
 const { left, down, right, up, home, end, pageUp, pageDown } = EVENT_CODE

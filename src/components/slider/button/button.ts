@@ -1,6 +1,6 @@
-import { buildProps } from '../utils'
-import { isNumber } from '../utils/types'
+import { buildProps, isNumber } from '../utils'
 import type { ExtractPropTypes, Ref } from 'vue'
+import type Button from './index'
 
 export const sliderButtonProps = buildProps({
   modelValue: {
@@ -16,6 +16,13 @@ export const sliderButtonEmits = {
 }
 
 export type SliderButtonEmits = typeof sliderButtonEmits
+
+export type SliderButtonInstance = InstanceType<typeof Button>
+
+export type ButtonRefs = Record<
+  'firstButton' | 'secondButton',
+  Ref<SliderButtonInstance | undefined>
+>
 
 export interface SliderButtonInitData {
   hovering: boolean

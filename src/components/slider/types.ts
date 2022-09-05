@@ -167,5 +167,3 @@ export type EpPropFinalized<Type, Value, Validator, Default, Required> = EpProp<
 >
 
 export type Arrayable<T> = T | T[]
-
-export {}
