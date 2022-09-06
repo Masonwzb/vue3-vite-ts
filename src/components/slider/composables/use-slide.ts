@@ -1,6 +1,6 @@
 import { computed, nextTick, ref, shallowRef } from 'vue'
 import type { CSSProperties, Ref, SetupContext } from 'vue'
-import type { Arrayable } from '../types'
+import type { Arrayable, RangeValue } from '../types'
 import type { SliderEmits, SliderInitData, SliderProps } from '../slider'
 import type { ButtonRefs, SliderButtonInstance } from '../button/button'
 
@@ -78,32 +78,51 @@ export const useSlide = (
 
   const setFirstValue = (firstValue: number | undefined) => {
     initData.firstValue = firstValue!
-    _emit(props.range ? [minValue.value, maxValue.value] : firstValue!)
+    _emit(
+      props.range
+        ? { range: [minValue.value, maxValue.value], value: initData.thirdValue }
+        : firstValue!
+    )
   }
 
   const setSecondValue = (secondValue: number) => {
     initData.secondValue = secondValue
 
     if (props.range) {
-      _emit([minValue.value, maxValue.value])
+      _emit({ range: [minValue.value, maxValue.value], value: initData.thirdValue })
     }
   }
 
   const setThirdValue = (thirdValue: number) => {
     initData.thirdValue = thirdValue
+
+    if (props.range) {
+      _emit({ range: [minValue.value, maxValue.value], value: initData.thirdValue })
+    }
   }
 
-  const _emit = (val: Arrayable<number>) => {
-    emit('update:modelValue', val)
+  const _emit = (val: Arrayable<number> | RangeValue) => {
+    let emitModelValue = val
+    if ((val as RangeValue).range) {
+      emitModelValue = (val as RangeValue).range
+    }
+    emit('update:modelValue', emitModelValue)
     emit('input', val)
   }
 
   const emitChange = async () => {
     await nextTick()
-    emit('change', props.range ? [minValue.value, maxValue.value] : props.modelValue)
+    emit(
+      'change',
+      props.range
+        ? { range: [minValue.value, maxValue.value], value: initData.thirdValue }
+        : props.modelValue
+    )
   }
 
-  const handleSliderPointerEvent = (event: MouseEvent | TouchEvent): Ref<any> | undefined => {
+  const handleSliderPointerEvent = (
+    event: MouseEvent | TouchEvent
+  ): Ref<SliderButtonInstance | undefined> | undefined => {
     if (sliderDisabled.value || initData.dragging) return
     resetSize()
     const clientX = (event as TouchEvent).touches?.item(0)?.clientX ?? (event as MouseEvent).clientX
@@ -124,6 +143,7 @@ export const useSlide = (
     const buttonRef = handleSliderPointerEvent(event)
     if (buttonRef) {
       await nextTick()
+      // @ts-ignore
       buttonRef.value!.onButtonDown(event)
     }
   }

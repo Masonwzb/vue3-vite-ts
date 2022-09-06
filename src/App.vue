@@ -26,6 +26,14 @@ function personaChanged(e: Event) {
 
 const value1 = ref(true)
 const value2 = ref([30, 60])
+
+function handleSliderChange(val: any) {
+  console.log('handleSliderChange = ', val)
+}
+
+function handleSliderInput(val: any) {
+  console.log('handleSliderInput = ', val)
+}
 </script>
 
 <template>
@@ -57,7 +65,7 @@ const value2 = ref([30, 60])
 
   <div style="width: 100%;height: 100px;display: flex;justify-content: center;align-items: center;background: #2F354C;">
     <div style="width: 700px">
-      <TimeLineSlider :range='true' v-model='value2' />
+      <TimeLineSlider :range='true' v-model='value2' @change='handleSliderChange' @input='handleSliderInput' />
     </div>
   </div>
 

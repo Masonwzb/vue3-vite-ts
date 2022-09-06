@@ -21,7 +21,7 @@ export const useSliderButton = (
   })
 
   const wrapperStyle: ComputedRef<CSSProperties> = computed(() => {
-    return { left: currentPosition.value }
+    return { left: currentPosition.value, zIndex: props.rangeBtn ? 2 : 1 }
   })
 
   const handleMouseEnter = () => {

@@ -6,6 +6,14 @@ export const sliderButtonProps = buildProps({
   modelValue: {
     type: Number,
     default: 0
+  },
+  buttonClass: {
+    type: String,
+    default: 'avatar-slider__button--pointer'
+  },
+  rangeBtn: {
+    type: Boolean,
+    default: false
   }
 } as const)
 

@@ -13,6 +13,10 @@ const SliderButton = defineComponent({
     buttonClass: {
       type: String,
       default: 'avatar-slider__button--pointer'
+    },
+    rangeBtn: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit, expose }) {

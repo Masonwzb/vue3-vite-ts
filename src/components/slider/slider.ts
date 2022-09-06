@@ -1,6 +1,6 @@
 import { buildProps, definePropType } from './utils'
 import { isArray, isNumber } from './utils'
-import type { Arrayable } from './types'
+import type { Arrayable, RangeValue } from './types'
 import type { ExtractPropTypes } from 'vue'
 
 export interface SliderInitData {
@@ -39,8 +39,10 @@ export const sliderProps = buildProps({
 
 export type SliderProps = ExtractPropTypes<typeof sliderProps>
 
-const isValidValue = (value: Arrayable<number>) =>
-  isNumber(value) || (isArray(value) && value.every(isNumber))
+const isValidValue = (val: Arrayable<number> | RangeValue) =>
+  isNumber(val) ||
+  (isArray(val) && val.every(isNumber)) ||
+  (isNumber(val.value) && isArray(val.range) && val.range.every(isNumber))
 
 export const sliderEmits = {
   ['update:modelValue']: isValidValue,

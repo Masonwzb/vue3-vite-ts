@@ -167,3 +167,8 @@ export type EpPropFinalized<Type, Value, Validator, Default, Required> = EpProp<
 >
 
 export type Arrayable<T> = T | T[]
+
+export interface RangeValue {
+  range: Array<number>
+  value: Arrayable<number>
+}

@@ -93,7 +93,7 @@ const TimeLineSlider = defineComponent({
     })
 
     const getButtonClass = () => {
-      return props.range ? 'avatar-slider__button--cut' : 'avatar-slider__button--pointer'
+      return props.range ? 'avatar-slider__button--range' : 'avatar-slider__button--pointer'
     }
 
     const makeTheCut = () => {
@@ -101,12 +101,14 @@ const TimeLineSlider = defineComponent({
         <>
           <SliderButton
             ref={secondButton}
-            buttonClass="avatar-slider__button--cut"
+            buttonClass="avatar-slider__button--range"
+            rangeBtn={true}
             modelValue={secondValue.value}
             onUpdate:modelValue={setSecondValue}
           />
           <SliderButton
             buttonClass="avatar-slider__button--pointer"
+            rangeBtn={false}
             modelValue={thirdValue.value}
             onUpdate:modelValue={setThirdValue}
           />
@@ -122,11 +124,12 @@ const TimeLineSlider = defineComponent({
           onMousedown={onSliderDown}
         >
           <div class="avatar-slider__bar" style={barStyle.value} />
-          <div v-show={props.range} class="avatar-slider__cut--one" style={barStyle.value} />
-          <div v-show={props.range} class="avatar-slider__cut--two" style={barStyle.value} />
+          <div v-show={props.range} class="avatar-slider__range--min" style={barStyle.value} />
+          <div v-show={props.range} class="avatar-slider__range--max" style={barStyle.value} />
           <SliderButton
             ref={firstButton}
             buttonClass={getButtonClass()}
+            rangeBtn={true}
             modelValue={firstValue.value}
             onUpdate:modelValue={setFirstValue}
           />
