@@ -41,8 +41,10 @@ export type SliderProps = ExtractPropTypes<typeof sliderProps>
 
 const isValidValue = (val: Arrayable<number> | RangeValue) =>
   isNumber(val) ||
-  (isArray(val) && val.every(isNumber)) ||
-  (isNumber(val.value) && isArray(val.range) && val.range.every(isNumber))
+  (isArray(val) && (val as Array<number>).every(isNumber)) ||
+  (isNumber((val as RangeValue).value) &&
+    isArray((val as RangeValue).range) &&
+    (val as RangeValue).range.every(isNumber))
 
 export const sliderEmits = {
   ['update:modelValue']: isValidValue,

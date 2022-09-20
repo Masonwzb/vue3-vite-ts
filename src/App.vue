@@ -17,7 +17,7 @@ import { ref } from 'vue'
 // import './practice/webRTC/twoTabPeerconnection.js'
 // import './practice/inversify'
 // import './practice/designPatterns/prototype/eg1.ts'
-import TimeLineSlider from './components/slider'
+// import TimeLineSlider from './components/slider'
 
 function personaChanged(e: Event) {
   const [isChecked] = (e as CustomEvent).detail
@@ -63,16 +63,16 @@ function handleSliderInput(val: any) {
 
 <!--  <EventTest />-->
 
-  <div style="width: 100%;height: 100px;display: flex;justify-content: center;align-items: center;background: #2F354C;">
-    <div style="width: 700px">
-      <TimeLineSlider :range='true' v-model='value2' @change='handleSliderChange' @input='handleSliderInput' />
-    </div>
-  </div>
+<!--  <div style="width: 100%;height: 100px;display: flex;justify-content: center;align-items: center;background: #2F354C;">-->
+<!--    <div style="width: 700px">-->
+<!--      <TimeLineSlider :range='true' v-model='value2' @change='handleSliderChange' @input='handleSliderInput' />-->
+<!--    </div>-->
+<!--  </div>-->
 
 </template>
 
 <style lang='scss'>
-@import "./components/slider/style.scss";
+//@import "./components/slider/style.scss";
 /*@import "./components/rotatingCube/index.css";*/
 /*body {*/
 /*  background: #e0cdcf;*/
