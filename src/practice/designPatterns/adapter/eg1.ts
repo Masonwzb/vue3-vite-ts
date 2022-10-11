@@ -1,8 +1,14 @@
 // 假设你有两个接口相互兼容的类：圆孔（RoundHole）和圆钉（RoundPeg）。
 class RoundHole {
-  constructor() {}
+  private radius: number
 
-  getRadius() {}
+  constructor(radius?: number) {
+    this.radius = radius || 0
+  }
+
+  getRadius() {
+    return this.radius
+  }
   // 返回孔的半径。
 
   fits(peg: RoundPeg) {
@@ -11,17 +17,29 @@ class RoundHole {
 }
 
 class RoundPeg {
-  constructor() {}
+  private radius: number
 
-  getRadius() {}
+  constructor(radius?: number) {
+    this.radius = radius || 0
+  }
+
+  getRadius() {
+    return this.radius
+  }
   // 返回钉子的半径。
 }
 
 // 但还有一个不兼容的类：方钉（Square­Peg）。
 class SquarePeg {
-  constructor() {}
+  private width: number
 
-  getWidth() {}
+  constructor(width?: number) {
+    this.width = width || 0
+  }
+
+  getWidth() {
+    return this.width
+  }
   // 返回方钉的宽度。
 }
 
@@ -32,6 +50,7 @@ class SquarePegAdapter extends RoundPeg {
   private peg: SquarePeg
 
   constructor(peg: SquarePeg) {
+    super()
     this.peg = peg
   }
 
@@ -50,7 +69,7 @@ class SquarePegAdapter extends RoundPeg {
 
   const small_sqpeg = new SquarePeg(5)
   const large_sqpeg = new SquarePeg(10)
-  hole.fits(small_sqpeg) // 此处无法编译（类型不一致）。
+  // hole.fits(small_sqpeg) // 此处无法编译（类型不一致）。
 
   const small_sqpeg_adapter = new SquarePegAdapter(small_sqpeg)
   const large_sqpeg_adapter = new SquarePegAdapter(large_sqpeg)
