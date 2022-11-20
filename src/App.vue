@@ -32,7 +32,7 @@ function handleSliderChange(val: any) {
 }
 
 function handleSliderInput(val: any) {
-  console.log('handleSliderInput colleague changes = ', val)
+  console.log('handleSliderInput colleague changes = merge changes =  ', val)
 }
 </script>
 
