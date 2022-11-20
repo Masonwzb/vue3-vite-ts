@@ -28,7 +28,7 @@ const value1 = ref(true)
 const value2 = ref([30, 60])
 
 function handleSliderChange(val: any) {
-  console.log('handleSliderChange = ', val)
+  console.log('handleSliderChange my changes = ', val)
 }
 
 function handleSliderInput(val: any) {
