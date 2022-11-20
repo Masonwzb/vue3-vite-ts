@@ -28,7 +28,7 @@ const value1 = ref(true)
 const value2 = ref([30, 60])
 
 function handleSliderChange(val: any) {
-  console.log('handleSliderChange test branch changes = ', val)
+  console.log('handleSliderChange test branch changes 22222222222222222222222 = ', val)
 }
 
 function handleSliderInput(val: any) {
